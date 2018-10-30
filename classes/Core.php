@@ -10,7 +10,8 @@
 			$this->db = new PDO('mysql:host=localhost;dbname=project;charset=utf8', 'root', '');
 
 			if(!$this->db) {
-				exit("Не удалось подключиться к Базе Данных.");
+				//Не удалось подключиться к Базе Данных
+				header("Location: error.php");
 			}
 		}
 
@@ -23,7 +24,8 @@
 			#CATEGORIES
 			$result_categories = $this->db->query("SELECT * FROM categories");
 			if(!$result_categories) {
-				exit("Ошибка!");
+				//Ошибка не удалось получить данные из таблицы categories
+				header("Location: error.php");
 			}
 
 			$row_categories = array();
@@ -40,7 +42,8 @@
 			#QUESTIONS
 			$result_questions = $this->db->query("SELECT * FROM questions");
 			if(!$result_questions) {
-				exit("Ошибка!");
+				//Ошибка не удалось получить данные из таблицы questions
+				header("Location: error.php");
 			}
 
 			$row_questions = array();
