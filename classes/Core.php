@@ -54,10 +54,10 @@
 			for ($i = 0; $i < $result_questions->rowCount(); $i++) {
 				printf("<a class='cd-faq-trigger' href='#0'>%s</a>", $row_questions[$i]['title']);
 				echo "<div class='cd-faq-content'>";
-				printf("<p>%s</p>", $row_questions['text']);
+				printf("<p>%s</p>", $row_questions[$i]['text']);
 				echo "</div>";
 			}
-			echo "</li>";
+					echo "</li>";
 			echo "</section";
 
 
