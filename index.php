@@ -4,7 +4,6 @@
 	require_once("classes/Core.php");
 
 	if ($_GET['option']) {
-		#code
 		$class = trim(strip_tags($_GET['option']));
 
 	}

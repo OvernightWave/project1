@@ -1,6 +1,22 @@
 <?php 
 	//require_once("/config.php");
 
+	set_error_handler('error_handler');
+	function error_handler($errno, $errmsg, $filename, $linenum) {
+		$date = date('Y-m-d H:i:s (T)');
+		$f = fopen('errors.log', 'a');
+		if (!empty($f)) {
+			$filename  = str_replace($_SERVER['DOCUMENT_ROOT'],'',$filename);
+			$err  = "$date"."  Error: "."$errmsg $filename $linenum\r\n";
+			fwrite($f, $err);
+			fclose($f);
+		}
+	}
+
+	function exception_handler($exception) {
+ 		echo "Неперехваченное исключение: " , $exception->getMessage(), "\n";
+	}
+
 	abstract class Core {
 
 

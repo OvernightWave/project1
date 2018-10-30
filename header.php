@@ -13,5 +13,5 @@
 </head>
 <body>
 <header>
-	<h1><a href='index.php' style="color: #FFFFFF;">PROJECT</a></h1>
+	<h1><a href='index.php?option=main' style="color: #FFFFFF;">PROJECT</a></h1>
 </header>
