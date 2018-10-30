@@ -2,6 +2,7 @@
 	//require_once("/config.php");
 
 	set_error_handler('error_handler');
+	set_exception_handler('error_handler');
 	function error_handler($errno, $errmsg, $filename, $linenum) {
 		$date = date('Y-m-d H:i:s (T)');
 		$f = fopen('errors.log', 'a');
@@ -13,17 +14,13 @@
 		}
 	}
 
-	function exception_handler($exception) {
- 		echo "Неперехваченное исключение: " , $exception->getMessage(), "\n";
-	}
-
 	abstract class Core {
 
 
 		protected $db;
 
 		public function __construct() {
-			$this->db = new PDO('mysql:host=localhost;dbname=project;charset=utf8', 'root', '');
+			$this->db = new PDO('mysql:host=localhost;dbname=project;charset=utf8', 'roost', '');
 
 			if(!$this->db) {
 				//Не удалось подключиться к Базе Данных
