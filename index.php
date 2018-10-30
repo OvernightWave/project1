@@ -1,6 +1,5 @@
 <?php 
 	header("Content-Type:text/html;charset=utf-8");
-
 	require_once("config.php");
 	require_once("classes/Core.php");
 
@@ -21,13 +20,13 @@
 			$object->get_body();
 
 		}
-		else {
-			exit("<p>Нет данных для входа</p>");
+		else { //Нет данных для входа
+			header("Location: error.php");
 		}
 	}
 
-	else {
-		exit("<p>Неправильный адрес</p>");
+	else { //Неправильный адрес 
+		header("Location: error.php");
 	}
 
 
