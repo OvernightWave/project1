@@ -1,19 +1,6 @@
 <?php 
 	//require_once("/config.php");
 
-	set_error_handler('error_handler');
-	set_exception_handler('error_handler');
-	function error_handler($errno, $errmsg, $filename, $linenum) {
-		$date = date('Y-m-d H:i:s (T)');
-		$f = fopen('errors.log', 'a');
-		if (!empty($f)) {
-			$filename  = str_replace($_SERVER['DOCUMENT_ROOT'],'',$filename);
-			$err  = "$date"."  Error: "."$errmsg $filename $linenum\r\n";
-			fwrite($f, $err);
-			fclose($f);
-		}
-	}
-
 	abstract class Core {
 
 
@@ -48,10 +35,14 @@
 			<section class='cd-faq'>
 				<ul class='cd-faq-categories'>";
 			for ($i = 0; $i < $result_categories->rowCount(); $i++) {
-				printf("<li><a href='#%s'>%s</a></li>", $row_categories[$i]['id_category'], $row_categories[$i]['title']);
+				if ($i == 0) {
+					printf("<li><a class='selected' href='#%s'>%s</a></li>", $row_categories[$i]['id_category'], $row_categories[$i]['title']);	
+				}
+				else {
+					printf("<li><a href='#%s'>%s</a></li>", $row_categories[$i]['id_category'], $row_categories[$i]['title']);	
+				}
 			}
-			echo "
-				</ul>";
+			echo "</ul>";
 
 			#QUESTIONS
 			$result_questions = $this->db->query("SELECT * FROM questions");

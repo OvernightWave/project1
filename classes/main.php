@@ -1,5 +1,5 @@
 <?php
-	class main extends Core {
+	class Main extends Core {
 	 
 	}
 ?>
