@@ -12,11 +12,10 @@
 	}
 
 	if (file_exists("classes/".$class.".php")) {
-		#code
 		include("classes/".$class.".php");
 		if(class_exists($class)) {
 			$object = new $class;
-			$object->get_body();
+			$object->getBody();
 
 		}
 		else { //Нет данных для входа

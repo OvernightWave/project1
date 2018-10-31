@@ -14,7 +14,7 @@
 		}
 	}
 
-	abstract class core {
+	abstract class Сore {
 
 
 		protected $db;
@@ -42,10 +42,11 @@
 			}
 
 			$row_categories = array();
+			$row_categories = $result_categories->fetchAll(PDO::FETCH_ASSOC);
+
 			echo "
 			<section class='cd-faq'>
 				<ul class='cd-faq-categories'>";
-			$row_categories = $result_categories->fetchAll(PDO::FETCH_ASSOC);
 			for ($i = 0; $i < $result_categories->rowCount(); $i++) {
 				printf("<li><a href='%s'>%s</a></li>", $row_categories[$i]['id_category'], $row_categories[$i]['title']);
 			}
@@ -60,20 +61,28 @@
 			}
 
 			$row_questions = array();
-			echo "
-			<div class='cd-faq-items'>
-				<ul id='basics' class='cd-faq-group'>
-					<li class='cd-faq-title'><h2>Category 1</h2></li>
-			";
 			$row_questions = $result_questions->fetchAll(PDO::FETCH_ASSOC);
-			for ($i = 0; $i < $result_questions->rowCount(); $i++) {
-				echo "<li>";
-					printf("<a class='cd-faq-trigger' href='#0'>%s</a>", $row_questions[$i]['title']);
-					echo "<div class='cd-faq-content'>";
-					printf("<p>%s</p>", $row_questions[$i]['text']);
-					echo "</div>";
-				echo "</li>";
+
+			echo "<div class='cd-faq-items'>";			
+			for ($i = 0; $i < $result_categories->rowCount(); $i++) {
+				echo "<ul id='basics' class='cd-faq-group'>";
+				printf("<li class='cd-faq-title'><h2>%s</h2></li>",$row_categories[$i]['title']);
+				for ($j = 0; $j < $result_questions->rowCount(); $j++) {
+					if ($row_categories[$i]['id_category'] == $row_questions[$j]['id_category']) {
+						echo "<li>";
+							printf("<a class='cd-faq-trigger' href='#0'>%s</a>", $row_questions[$j]['title']);
+							echo "<div class='cd-faq-content'>";
+							printf("<p>%s</p>", $row_questions[$j]['text']);
+							echo "</div>";
+						echo "</li>";	
+					}
+				}
+				echo "</ul>";
 			}
+			echo "</div>";
+			
+
+
 				
 			
 
@@ -91,7 +100,7 @@
 			";
 		}
 
-		public function get_body() {
+		public function getBody() {
 			 $this->getHeader();
 			 $this->getContent();
 			 $this->getFooter();
