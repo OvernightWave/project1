@@ -14,7 +14,7 @@
 		}
 	}
 
-	abstract class Сore {
+	abstract class Core {
 
 
 		protected $db;
@@ -48,7 +48,7 @@
 			<section class='cd-faq'>
 				<ul class='cd-faq-categories'>";
 			for ($i = 0; $i < $result_categories->rowCount(); $i++) {
-				printf("<li><a href='%s'>%s</a></li>", $row_categories[$i]['id_category'], $row_categories[$i]['title']);
+				printf("<li><a href='#%s'>%s</a></li>", $row_categories[$i]['id_category'], $row_categories[$i]['title']);
 			}
 			echo "
 				</ul>";
@@ -65,7 +65,8 @@
 
 			echo "<div class='cd-faq-items'>";			
 			for ($i = 0; $i < $result_categories->rowCount(); $i++) {
-				echo "<ul id='basics' class='cd-faq-group'>";
+				printf("<a id='%s'></a>", $row_categories[$i]['id_category']);
+				echo "<ul class='cd-faq-group'>";
 				printf("<li class='cd-faq-title'><h2>%s</h2></li>",$row_categories[$i]['title']);
 				for ($j = 0; $j < $result_questions->rowCount(); $j++) {
 					if ($row_categories[$i]['id_category'] == $row_questions[$j]['id_category']) {
