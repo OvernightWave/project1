@@ -14,13 +14,13 @@
 		}
 	}
 
-	abstract class Core {
+	abstract class core {
 
 
 		protected $db;
 
 		public function __construct() {
-			$this->db = new PDO('mysql:host=localhost;dbname=project;charset=utf8', 'roost', '');
+			$this->db = new PDO('mysql:host=localhost;dbname=project;charset=utf8', 'root', '');
 
 			if(!$this->db) {
 				//Не удалось подключиться к Базе Данных
@@ -28,11 +28,11 @@
 			}
 		}
 
-		protected function get_header() {
+		protected function getHeader() {
 			 include "header.php";
 		}
 
-		protected function get_content() {
+		protected function getContent() {
 
 			#CATEGORIES
 			$result_categories = $this->db->query("SELECT * FROM categories");
@@ -64,25 +64,37 @@
 			<div class='cd-faq-items'>
 				<ul id='basics' class='cd-faq-group'>
 					<li class='cd-faq-title'><h2>Category 1</h2></li>
-					<li>
 			";
 			$row_questions = $result_questions->fetchAll(PDO::FETCH_ASSOC);
 			for ($i = 0; $i < $result_questions->rowCount(); $i++) {
-				printf("<a class='cd-faq-trigger' href='#0'>%s</a>", $row_questions[$i]['title']);
-				echo "<div class='cd-faq-content'>";
-				printf("<p>%s</p>", $row_questions[$i]['text']);
-				echo "</div>";
+				echo "<li>";
+					printf("<a class='cd-faq-trigger' href='#0'>%s</a>", $row_questions[$i]['title']);
+					echo "<div class='cd-faq-content'>";
+					printf("<p>%s</p>", $row_questions[$i]['text']);
+					echo "</div>";
+				echo "</li>";
 			}
-					echo "</li>";
-			echo "</section";
+				
+			
 
 
 
 		}
 
+		protected function getFooter() {
+			echo "
+					<a href='#0' class='cd-close-panel'></a>
+				</section> <!-- cd-faq -->
+				<script src='js/jquery-2.1.1.js'></script>
+				<script src='js/jquery.mobile.custom.min.js'></script>
+				<script src='js/main.js'></script> <!-- Resource jQuery -->
+			";
+		}
+
 		public function get_body() {
-			 $this->get_header();
-			 $this->get_content();
+			 $this->getHeader();
+			 $this->getContent();
+			 $this->getFooter();
 			 
 		}
 	}
